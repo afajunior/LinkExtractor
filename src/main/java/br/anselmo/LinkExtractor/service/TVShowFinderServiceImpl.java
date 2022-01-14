@@ -7,27 +7,29 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-public class TVShowFinder {
+@Service
+public class TVShowFinderServiceImpl implements TVShowFinderService {
 
     private final String WEBSITE = "https://www.watchseries1.video/all-series";
 
-    public StringResponse getUrl(String serieName) throws Exception {
+    public StringResponse getUrl(String serieName) {
         try {
             String xpath = "//*[contains(@class, 'list-group-item')]/a[*/b=\"" + serieName + "\"]";
 
             Element element = findElement(xpath);
-
             String tvShowUrl = element.attr("href");
+
             return new StringResponse(tvShowUrl);
         } catch (IOException e) {
             throw new HostConnectionException();
         }
     }
 
-    public Element findElement(String xpath) throws Exception {
+    public Element findElement(String xpath) throws IOException {
         String webUrl = getWebsiteUrl();
         Document doc = Jsoup.connect(webUrl).get();
 

@@ -1,7 +1,7 @@
 package br.anselmo.LinkExtractor.controller;
 
 import br.anselmo.LinkExtractor.domain.StringResponse;
-import br.anselmo.LinkExtractor.service.TVShowFinder;
+import br.anselmo.LinkExtractor.service.TVShowFinderService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,9 +14,14 @@ public class SerieController {
         TODO: Melhor forma de tratar aspas no xpath
      */
 
+    private final TVShowFinderService tvShowFinderService;
+
+    public SerieController(TVShowFinderService tvShowFinderService) {
+        this.tvShowFinderService = tvShowFinderService;
+    }
+
     @GetMapping
-    public StringResponse getUrl(String tvShowName) throws Exception {
-        TVShowFinder finder = new TVShowFinder();
-        return finder.getUrl(tvShowName);
+    public StringResponse getUrl(String tvShowName) {
+        return tvShowFinderService.getUrl(tvShowName);
     }
 }
