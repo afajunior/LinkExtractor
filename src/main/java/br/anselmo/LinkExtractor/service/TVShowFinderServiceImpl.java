@@ -18,7 +18,8 @@ public class TVShowFinderServiceImpl implements TVShowFinderService {
 
     public StringResponse getUrl(String serieName) {
         try {
-            String xpath = "//*[contains(@class, 'list-group-item')]/a[*/b=\"" + serieName + "\"]";
+            serieName = serieName.replaceAll("'", "^'");
+            String xpath = String.format("//*[contains(@class, 'list-group-item')]/a[*/b=\"%s\"]", serieName);
 
             Element element = findElement(xpath);
             String tvShowUrl = element.attr("href");

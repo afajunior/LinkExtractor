@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/serie")
 public class SerieController {
 
-    /*
-        TODO: Melhor forma de tratar aspas no xpath
-     */
-
     private final TVShowFinderService tvShowFinderService;
 
     public SerieController(TVShowFinderService tvShowFinderService) {
