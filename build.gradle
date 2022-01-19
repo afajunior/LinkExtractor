@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
 	implementation 'org.jsoup:jsoup:1.14.3'
-	implementation 'net.sf.saxon:Saxon-HE:10.6'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
