@@ -20,8 +20,7 @@ public class TVShowFinderServiceImpl implements TVShowFinderService {
 
     public StringResponse getUrl(String serieName) {
         try {
-            String xpath = String.format("//*[contains(@class, 'list-group-item')]/a[*/b=\"%s\"]", serieName);
-
+            String xpath = getXpathRule(serieName);
             Element element = findElement(xpath);
             String tvShowUrl = element.attr("href");
 
@@ -44,5 +43,9 @@ public class TVShowFinderServiceImpl implements TVShowFinderService {
 
     public String getWebsiteUrl() {
         return website;
+    }
+
+    public String getXpathRule(String serieName) {
+        return String.format("//*[contains(@class, 'list-group-item')]/a[*/b=\"%s\"]", serieName);
     }
 }
