@@ -7,6 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,11 +15,11 @@ import java.io.IOException;
 @Service
 public class TVShowFinderServiceImpl implements TVShowFinderService {
 
-    private final String WEBSITE = "https://www.watchseries1.video/all-series";
+    @Value("${linkExtractor.webs.url}")
+    private String website;
 
     public StringResponse getUrl(String serieName) {
         try {
-            serieName = serieName.replaceAll("'", "^'");
             String xpath = String.format("//*[contains(@class, 'list-group-item')]/a[*/b=\"%s\"]", serieName);
 
             Element element = findElement(xpath);
@@ -42,6 +43,6 @@ public class TVShowFinderServiceImpl implements TVShowFinderService {
     }
 
     public String getWebsiteUrl() {
-        return WEBSITE;
+        return website;
     }
 }
